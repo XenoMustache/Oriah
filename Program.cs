@@ -1,9 +1,10 @@
-﻿using System;
+﻿using Core.Utilities;
 
 namespace Oriah {
 	class Program {
 		static void Main(string[] args) {
-			Console.WriteLine("Hello World!");
+			Utilities.HideConsole();
+			new Game();
 		}
 	}
 }
