@@ -1,16 +1,18 @@
-﻿using SFML.Graphics;
+﻿using Coroutine;
+using RandomDataGenerator.FieldOptions;
+using RandomDataGenerator.Randomizers;
+using SFML.Graphics;
 using SFML.System;
 using SFML.Window;
+using System.Collections.Generic;
 
 namespace Oriah {
 	public class Game {
 		public Game() => Run();
 
-		double time, deltatime = 0.01, currentTime, accumulator, secondsPerFrame = 0.05;
+		double deltatime = 0.01, currentTime, accumulator, secondsPerFrame = 0.05;
 		Clock clock;
 		RenderWindow window;
-
-		RectangleShape rect;
 
 		void Run() {
 			ContextSettings settings = new ContextSettings();
@@ -28,11 +30,6 @@ namespace Oriah {
 		void Initialize() {
 			clock = new Clock();
 			currentTime = clock.Restart().AsSeconds();
-
-			rect = new RectangleShape(new Vector2f(100, 100));
-			rect.Position = new Vector2f((float)window.Size.X / 2, 0);
-			rect.Origin = rect.Size / 2;
-			rect.FillColor = Color.Red;
 		}
 
 		void Loop() {
@@ -51,7 +48,6 @@ namespace Oriah {
 
 			while (accumulator >= deltatime) {
 				Update(deltatime);
-				time += deltatime;
 				accumulator -= deltatime;
 			}
 
@@ -60,14 +56,8 @@ namespace Oriah {
 			window.Display();
 		}
 
-		void Update(double deltaTime) {
-			rect.Position += new Vector2f(0, 100 * (float)deltaTime);
-		}
-
-		void Render() {
-			window.Draw(rect);
-		}
-
 		void Input() { }
+		void Update(double deltaTime) { }
+		void Render() { }
 	}
 }
