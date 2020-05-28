@@ -1,10 +1,6 @@
-﻿using Coroutine;
-using RandomDataGenerator.FieldOptions;
-using RandomDataGenerator.Randomizers;
-using SFML.Graphics;
+﻿using SFML.Graphics;
 using SFML.System;
 using SFML.Window;
-using System.Collections.Generic;
 
 namespace Oriah {
 	public class Game {
