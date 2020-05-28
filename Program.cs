@@ -1,9 +1,9 @@
-﻿using Core.Utilities;
+﻿using Xenon.Common.Utilities;
 
 namespace Oriah {
 	class Program {
 		static void Main(string[] args) {
-			Utilities.HideConsole();
+			MiscUtils.HideConsole(false);
 			new Oriah("Oriah");
 		}
 	}
