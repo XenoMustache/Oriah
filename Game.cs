@@ -6,7 +6,7 @@ namespace Oriah {
 	public class Game {
 		public Game() => Run();
 
-		double time = 0.0, deltatime = 0.01, currentTime, accumulator = 0.0, secondsPerFrame = 0.25;
+		double time, deltatime = 0.01, currentTime, accumulator, secondsPerFrame = 0.05;
 		Clock clock;
 		RenderWindow window;
 
