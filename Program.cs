@@ -4,7 +4,7 @@ namespace Oriah {
 	class Program {
 		static void Main(string[] args) {
 			Utilities.HideConsole();
-			new Game();
+			new Oriah("Oriah");
 		}
 	}
 }
