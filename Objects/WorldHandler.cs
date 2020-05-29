@@ -21,7 +21,6 @@ namespace Oriah.Objects {
 		}
 
 		public override void Render(RenderWindow window) {
-
 			tile.Render(window);
 		}
 	}

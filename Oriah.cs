@@ -17,6 +17,7 @@ namespace Oriah {
 		protected override void Update(double deltaTime) {
 			base.Update(deltaTime);
 		}
+
 		protected override void Render(RenderWindow window) {
 			base.Render(window);
 		}

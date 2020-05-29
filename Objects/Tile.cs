@@ -24,7 +24,6 @@ namespace Oriah.Objects {
 		public override void Render(RenderWindow window) {
 			window.Draw(rect);
 
-
 			base.Render(window);
 		}
 	}
