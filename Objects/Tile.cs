@@ -13,18 +13,16 @@ namespace Oriah.Objects {
 
 			rect = new RectangleShape(new Vector2f(16, 16));
 			rect.FillColor = Color.Red;
-			rect.Position = position;
 			rect.Origin = rect.Size / 2; 
 		}
 
 		public override void Update(double deltaTime) {
-			base.Update(deltaTime);
+			position += new Vector2f(0, 10 * (float)deltaTime);
+			rect.Position = position;
 		}
 
 		public override void Render(RenderWindow window) {
 			window.Draw(rect);
-
-			base.Render(window);
 		}
 	}
 }

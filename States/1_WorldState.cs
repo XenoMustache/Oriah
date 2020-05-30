@@ -15,7 +15,7 @@ namespace Oriah.States {
 			Objects.Add(player);
 
 			world.Generate();
-			player.Init(new SFML.System.Vector2f(1280/2, 720/2));
+			player.Init(new SFML.System.Vector2f(1280 / 2, 720 / 2));
 		}
 
 		public override void Update(double deltaTime) {
