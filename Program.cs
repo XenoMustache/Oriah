@@ -4,7 +4,7 @@ using Xenon.Common.Utilities;
 namespace Oriah {
 	class Program {
 		static void Main(string[] args) {
-			MiscUtils.HideConsole();
+			MiscUtils.HideConsole(false);
 			new Oriah("Oriah", new Vector2u(1280, 720));
 		}
 	}

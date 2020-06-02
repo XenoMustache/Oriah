@@ -16,14 +16,13 @@ namespace Oriah.Objects {
 
 			rect = new RectangleShape(new Vector2f(16, 16));
 			rect.FillColor = Color.Red;
-			rect.Origin = rect.Size / 2;
 		}
 
 		public override void Update() {
-			if (player != null) {
-				float distance = (float)Math.Abs(Math.Sqrt(((player.position.X - position.X) * (player.position.X - position.X)) + ((player.position.Y - position.Y) * (player.position.Y - position.Y))));
-				if (distance > 200) disabled = true; else disabled = false;
-			}
+			//if (player != null) {
+			//	float distance = (float)Math.Abs(Math.Sqrt(((player.position.X - position.X) * (player.position.X - position.X)) + ((player.position.Y - position.Y) * (player.position.Y - position.Y))));
+			//	if (distance > 1) disabled = true; else disabled = false;
+			//}
 
 			if (!disabled) {
 				rect.Position = position;

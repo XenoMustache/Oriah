@@ -7,7 +7,7 @@ namespace Oriah.Objects {
 	public class Player : GameObject {
 		public Vector2f position;
 
-		float moveSpeed = 3;
+		float moveSpeed = 0.5f;
 		View cameraView;
 		RectangleShape rect;
 
@@ -17,7 +17,7 @@ namespace Oriah.Objects {
 			cameraView = new View();
 			cameraView.Center = position;
 
-			rect = new RectangleShape(new Vector2f(100, 100));
+			rect = new RectangleShape(new Vector2f(8, 16));
 			rect.Origin = rect.Size / 2;
 			rect.FillColor = Color.Blue;
 		}
@@ -44,6 +44,7 @@ namespace Oriah.Objects {
 			window.Draw(rect);
 
 			cameraView.Size = (Vector2f)window.Size;
+			cameraView.Zoom(0.3f);
 
 			base.Render();
 		}
