@@ -1,5 +1,4 @@
 ﻿using Oriah.States;
-using SFML.Graphics;
 using SFML.System;
 using Xenon.Client;
 
@@ -14,12 +13,12 @@ namespace Oriah {
 			base.Init();
 		}
 
-		protected override void Update(double deltaTime) {
-			base.Update(deltaTime);
+		protected override void Update() {
+			base.Update();
 		}
 
-		protected override void Render(RenderWindow window) {
-			base.Render(window);
+		protected override void Render() {
+			base.Render();
 		}
 	}
 }

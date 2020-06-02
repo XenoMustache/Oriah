@@ -19,7 +19,7 @@ namespace Oriah.Objects {
 			rect.Origin = rect.Size / 2;
 		}
 
-		public override void Update(double deltaTime) {
+		public override void Update() {
 			if (player != null) {
 				float distance = (float)Math.Abs(Math.Sqrt(((player.position.X - position.X) * (player.position.X - position.X)) + ((player.position.Y - position.Y) * (player.position.Y - position.Y))));
 				if (distance > 200) disabled = true; else disabled = false;
@@ -30,7 +30,7 @@ namespace Oriah.Objects {
 			}
 		}
 
-		public override void Render(RenderWindow window) {
+		public override void Render() {
 			if (!disabled) {
 				window.Draw(rect);
 			}

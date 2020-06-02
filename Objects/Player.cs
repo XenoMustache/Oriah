@@ -10,7 +10,6 @@ namespace Oriah.Objects {
 		float moveSpeed = 3;
 		View cameraView;
 		RectangleShape rect;
-		RenderWindow window;
 
 		public void Init(Vector2f position) {
 			this.position = position;
@@ -23,7 +22,7 @@ namespace Oriah.Objects {
 			rect.FillColor = Color.Blue;
 		}
 
-		public override void Update(double deltaTime) {
+		public override void Update() {
 			var left = Keyboard.IsKeyPressed(Keyboard.Key.A) ? 1 : 0;
 			var right = Keyboard.IsKeyPressed(Keyboard.Key.D) ? 1 : 0; ;
 			var up = Keyboard.IsKeyPressed(Keyboard.Key.W) ? 1 : 0; ;
@@ -38,16 +37,15 @@ namespace Oriah.Objects {
 			cameraView.Move(new Vector2f(moveSpeed * horizontal, moveSpeed * vertical));
 			window.SetView(cameraView);
 
-			base.Update(deltaTime);
+			base.Update();
 		}
 
-		public override void Render(RenderWindow window) {
-			this.window = window;
+		public override void Render() {
 			window.Draw(rect);
 
 			cameraView.Size = (Vector2f)window.Size;
 
-			base.Render(window);
+			base.Render();
 		}
 	}
 }

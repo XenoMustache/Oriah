@@ -6,12 +6,9 @@ using Xenon.Common.Object;
 
 namespace Oriah.Objects {
 	public class WorldHandler : GameObject {
-		Vector2i worldSize;
 		List<Tile> tiles = new List<Tile>();
 
 		public void Generate(Vector2i size) {
-			worldSize = size;
-
 			for (var i = 0; i < size.X; i++) {
 				for (var j = 0; j < size.Y; j++) {
 					Tile tile = new Tile(new Vector2f(i * 8, j * 8));
@@ -23,15 +20,17 @@ namespace Oriah.Objects {
 			Console.WriteLine("Generating World...");
 		}
 
-		public override void Update(double deltaTime) {
+		public override void Update() {
 			for (var i = 0; i < tiles.Count; i++) {
-				tiles[i].Update(deltaTime);
+				tiles[i].deltaTime = deltaTime;
+				tiles[i].Update();
 			}
 		}
 
-		public override void Render(RenderWindow window) {
+		public override void Render() {
 			for (var i = 0; i < tiles.Count; i++) {
-				tiles[i].Render(window);
+				tiles[i].window = window;
+				tiles[i].Render();
 			}
 		}
 	}
