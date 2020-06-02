@@ -1,5 +1,6 @@
 ﻿using Oriah.Objects;
 using SFML.Graphics;
+using SFML.System;
 using System;
 using Xenon.Common.State;
 
@@ -14,7 +15,7 @@ namespace Oriah.States {
 			Objects.Add(world);
 			Objects.Add(player);
 
-			world.Generate();
+			world.Generate(new Vector2i(25, 25));
 			player.Init(new SFML.System.Vector2f(1280 / 2, 720 / 2));
 		}
 

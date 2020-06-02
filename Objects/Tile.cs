@@ -5,6 +5,9 @@ using Xenon.Common.Object;
 
 namespace Oriah.Objects {
 	public class Tile : GameObject {
+		public bool disabled = false;
+		public Player player;
+
 		RectangleShape rect;
 		Vector2f position;
 
@@ -13,16 +16,24 @@ namespace Oriah.Objects {
 
 			rect = new RectangleShape(new Vector2f(16, 16));
 			rect.FillColor = Color.Red;
-			rect.Origin = rect.Size / 2; 
+			rect.Origin = rect.Size / 2;
 		}
 
 		public override void Update(double deltaTime) {
-			position += new Vector2f(0, 10 * (float)deltaTime);
-			rect.Position = position;
+			if (player != null) {
+				float distance = (float)Math.Abs(Math.Sqrt(((player.position.X - position.X) * (player.position.X - position.X)) + ((player.position.Y - position.Y) * (player.position.Y - position.Y))));
+				if (distance > 200) disabled = true; else disabled = false;
+			}
+
+			if (!disabled) {
+				rect.Position = position;
+			}
 		}
 
 		public override void Render(RenderWindow window) {
-			window.Draw(rect);
+			if (!disabled) {
+				window.Draw(rect);
+			}
 		}
 	}
 }

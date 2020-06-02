@@ -1,27 +1,38 @@
 ﻿using SFML.Graphics;
 using SFML.System;
 using System;
+using System.Collections.Generic;
 using Xenon.Common.Object;
 
 namespace Oriah.Objects {
 	public class WorldHandler : GameObject {
-		int worldSize;
-		Tile tile;
+		Vector2i worldSize;
+		List<Tile> tiles = new List<Tile>();
 
-		public void Generate(int size = 25) {
+		public void Generate(Vector2i size) {
 			worldSize = size;
 
-			Console.WriteLine("Generating World...");
+			for (var i = 0; i < size.X; i++) {
+				for (var j = 0; j < size.Y; j++) {
+					Tile tile = new Tile(new Vector2f(i * 8, j * 8));
 
-			tile = new Tile(new Vector2f(100, 100));
+					tiles.Add(tile);
+				}
+			}
+
+			Console.WriteLine("Generating World...");
 		}
 
 		public override void Update(double deltaTime) {
-			tile.Update(deltaTime);
+			for (var i = 0; i < tiles.Count; i++) {
+				tiles[i].Update(deltaTime);
+			}
 		}
 
 		public override void Render(RenderWindow window) {
-			tile.Render(window);
+			for (var i = 0; i < tiles.Count; i++) {
+				tiles[i].Render(window);
+			}
 		}
 	}
 }
