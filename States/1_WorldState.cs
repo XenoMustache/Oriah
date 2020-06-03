@@ -13,8 +13,9 @@ namespace Oriah.States {
 			Objects.Add(world);
 			Objects.Add(player);
 
-			world.Generate(new Vector2i(25, 15));
-			player.Init(new Vector2f(25*4,-8));
+			player.Init(new Vector2f(250 * 8, -8));
+			world.player = player;
+			world.Generate(new Vector2i(500, 25));
 		}
 
 		public override void Update() {

@@ -5,6 +5,7 @@ using Xenon.Common.Object;
 
 namespace Oriah.Objects {
 	public class WorldHandler : GameObject {
+		public Player player;
 		List<Tile> tiles = new List<Tile>();
 
 		public void Generate(Vector2i size) {
@@ -12,6 +13,7 @@ namespace Oriah.Objects {
 				for (var j = 0; j < size.Y; j++) {
 					Tile tile = new Tile(new Vector2f(i * 8, j * 8));
 
+					tile.player = player;
 					tiles.Add(tile);
 				}
 			}

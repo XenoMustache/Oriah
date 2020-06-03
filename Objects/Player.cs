@@ -1,13 +1,14 @@
 ﻿using SFML.Graphics;
 using SFML.System;
 using SFML.Window;
+using System;
 using Xenon.Common.Object;
 
 namespace Oriah.Objects {
 	public class Player : GameObject {
 		public Vector2f position;
 
-		float moveSpeed = 0.5f;
+		float moveSpeed = 0.25f;
 		View cameraView;
 		RectangleShape rect;
 
@@ -23,18 +24,18 @@ namespace Oriah.Objects {
 		}
 
 		public override void Update() {
-			var left = Keyboard.IsKeyPressed(Keyboard.Key.A) ? 1 : 0;
-			var right = Keyboard.IsKeyPressed(Keyboard.Key.D) ? 1 : 0; ;
-			var up = Keyboard.IsKeyPressed(Keyboard.Key.W) ? 1 : 0; ;
-			var down = Keyboard.IsKeyPressed(Keyboard.Key.S) ? 1 : 0; ;
+			var horizontal = (Keyboard.IsKeyPressed(Keyboard.Key.D) ? 1 : 0) - (Keyboard.IsKeyPressed(Keyboard.Key.A) ? 1 : 0);
 
-			var horizontal = right - left;
-			var vertical = down - up;
+			var oldConverted = new Vector2f((float)Math.Floor(position.X / 8), (float)Math.Floor(position.Y / 8));
 
-			position += new Vector2f(moveSpeed * horizontal, moveSpeed * vertical);
+			position += new Vector2f(moveSpeed * horizontal, 0);
 			rect.Position = position;
+			
+			var newConverted = new Vector2f((float)Math.Floor(position.X / 8), (float)Math.Floor(position.Y / 8));
 
-			cameraView.Move(new Vector2f(moveSpeed * horizontal, moveSpeed * vertical));
+			if (horizontal != 0 && newConverted != oldConverted) Console.WriteLine(newConverted.ToString());
+
+			cameraView.Center = position;
 			window.SetView(cameraView);
 
 			base.Update();
