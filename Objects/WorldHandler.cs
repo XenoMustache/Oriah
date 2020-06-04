@@ -1,6 +1,7 @@
 ﻿using SFML.System;
 using System;
 using System.Collections.Generic;
+using System.Threading.Tasks;
 using Xenon.Common.Object;
 
 namespace Oriah.Objects {
@@ -8,17 +9,26 @@ namespace Oriah.Objects {
 		public Player player;
 		List<Tile> tiles = new List<Tile>();
 
-		public void Generate(Vector2i size) {
+		public async Task Generate(Vector2i size) {
+			List<Task> listOfTasks = new List<Task>();
+
 			for (var i = 0; i < size.X; i++) {
 				for (var j = 0; j < size.Y; j++) {
-					Tile tile = new Tile(new Vector2f(i * 8, j * 8));
-
-					tile.player = player;
-					tiles.Add(tile);
+					listOfTasks.Add(CreateTile(i, j));
 				}
 			}
 
 			Console.WriteLine("Generating World...");
+			await Task.WhenAll(listOfTasks);
+		}
+
+		public Task CreateTile(int i, int j) {
+			Tile tile = new Tile(new Vector2f(i * 8, j * 8));
+
+			tile.player = player;
+			tiles.Add(tile);
+
+			return Task.CompletedTask;
 		}
 
 		public override void Update() {
