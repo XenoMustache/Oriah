@@ -44,5 +44,7 @@ namespace Oriah.Objects {
 				tiles[i].Render();
 			}
 		}
+
+		public override void Init() { }
 	}
 }

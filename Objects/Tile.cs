@@ -34,5 +34,7 @@ namespace Oriah.Objects {
 				window.Draw(rect);
 			}
 		}
+
+		public override void Init() { }
 	}
 }

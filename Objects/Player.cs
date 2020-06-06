@@ -12,6 +12,8 @@ namespace Oriah.Objects {
 		View cameraView;
 		RectangleShape rect;
 
+		public override void Init() { }
+
 		public void Init(Vector2f position) {
 			this.position = position;
 
@@ -37,8 +39,6 @@ namespace Oriah.Objects {
 
 			cameraView.Center = position;
 			window.SetView(cameraView);
-
-			base.Update();
 		}
 
 		public override void Render() {
@@ -46,8 +46,6 @@ namespace Oriah.Objects {
 
 			cameraView.Size = (Vector2f)window.Size;
 			cameraView.Zoom(0.3f);
-
-			base.Render();
 		}
 	}
 }
