@@ -76,5 +76,13 @@ namespace Oriah.Objects {
 			cameraView.Size = (Vector2f)window.Size;
 			cameraView.Zoom(0.3f);
 		}
+
+		protected override void OnDispose() {
+			rect.Dispose();
+			texture.Dispose();
+			sprite.Dispose();
+
+			base.OnDispose();
+		}
 	}
 }
