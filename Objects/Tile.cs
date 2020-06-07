@@ -11,7 +11,7 @@ namespace Oriah.Objects {
 		RectangleShape rect;
 		Vector2f position;
 
-		public Tile(Vector2f position) {
+		public void Init(Vector2f position) {
 			this.position = position;
 
 			rect = new RectangleShape(new Vector2f(8, 8));
@@ -34,7 +34,5 @@ namespace Oriah.Objects {
 				window.Draw(rect);
 			}
 		}
-
-		public override void Init() { }
 	}
 }

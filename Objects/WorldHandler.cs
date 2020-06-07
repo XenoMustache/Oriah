@@ -23,7 +23,8 @@ namespace Oriah.Objects {
 		}
 
 		public Task CreateTile(int i, int j) {
-			Tile tile = new Tile(new Vector2f(i * 8, j * 8));
+			Tile tile = new Tile();
+			tile.Init(new Vector2f(i * 8, j * 8));
 
 			tile.player = player;
 			tiles.Add(tile);
@@ -44,7 +45,5 @@ namespace Oriah.Objects {
 				tiles[i].Render();
 			}
 		}
-
-		public override void Init() { }
 	}
 }
