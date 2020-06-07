@@ -18,7 +18,7 @@ namespace Oriah.Objects {
 				}
 			}
 
-			Console.WriteLine("Generating World...");
+			Console.WriteLine("Generating World of size " + size.X + "x" + size.Y + "...");
 			await Task.WhenAll(listOfTasks);
 		}
 

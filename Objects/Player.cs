@@ -9,32 +9,43 @@ namespace Oriah.Objects {
 		public Vector2f position;
 		public int direction = 1;
 
-		float moveSpeed = 0.25f, spriteSpeed = 0.2f;
+		float moveSpeed = 0.25f, spriteSpeed = 0.15f, camZoom = 0.3f;
 		bool moving;
-		View cameraView;
-		RectangleShape rect;
 		Texture texture = new Texture("Resources\\walking.png");
 		Clock spriteClock = new Clock();
+		View cameraView;
+		RectangleShape rect;
 		Sprite sprite;
 		IntRect spriteRect;
+		Font font = new Font("Resources\\arial.ttf");
+		Text positionText;
 
 		public void Init(Vector2f startingPosition) {
 			position = startingPosition;
 			spriteRect = new IntRect(new Vector2i(0, 0), new Vector2i(8, 16));
 			sprite = new Sprite(texture, spriteRect);
 			sprite.Origin = new Vector2f(4, 8);
+			positionText = new Text("", font, 50);
+			positionText.Scale = new Vector2f(0.15f, 0.15f);
+			positionText.FillColor = Color.White;
 
 			rect = new RectangleShape(new Vector2f(8, 16));
 			rect.Origin = rect.Size / 2;
 			rect.FillColor = Color.Blue;
 
 			cameraView = new View();
-			cameraView.Center = new Vector2f(position.X, position.Y - 50);
+			cameraView.Center = new Vector2f(position.X, position.Y - 30);
 		}
 
 		public override void Update() {
 			var horizontal = (Keyboard.IsKeyPressed(Keyboard.Key.D) ? 1 : 0) - (Keyboard.IsKeyPressed(Keyboard.Key.A) ? 1 : 0);
+			var zoom = (Keyboard.IsKeyPressed(Keyboard.Key.Hyphen) ? 1 : 0) - (Keyboard.IsKeyPressed(Keyboard.Key.Equal) ? 1 : 0);
 			var oldConverted = new Vector2f((float)Math.Floor(position.X / 8), (float)Math.Floor(position.Y / 8));
+
+			camZoom += zoom * 0.001f;
+			camZoom = Math.Clamp(camZoom, 0.2f, 0.35f);
+
+			if (Keyboard.IsKeyPressed(Keyboard.Key.Backspace)) camZoom = 0.3f;
 
 			if (horizontal != 0) {
 				moving = true;
@@ -60,11 +71,11 @@ namespace Oriah.Objects {
 			position += new Vector2f(moveSpeed * horizontal, 0);
 			sprite.Position = new Vector2f(position.X, position.Y);
 			rect.Position = position;
+			positionText.Position = new Vector2f(position.X - 190, position.Y - 155);
 
 			var newConverted = new Vector2f((float)Math.Floor(position.X / 8), (float)Math.Floor(position.Y / 8));
 
-			if (horizontal != 0 && newConverted != oldConverted) Console.WriteLine("X: " + newConverted.X + " Y: " + newConverted.Y);
-
+			if (horizontal != 0 && newConverted != oldConverted) positionText.DisplayedString = "X: " + newConverted.X + " Y: " + newConverted.Y;
 			cameraView.Center = new Vector2f(position.X, position.Y - 50);
 			window.SetView(cameraView);
 		}
@@ -72,9 +83,10 @@ namespace Oriah.Objects {
 		public override void Render() {
 			// window.Draw(rect);
 			window.Draw(sprite);
+			window.Draw(positionText);
 
 			cameraView.Size = (Vector2f)window.Size;
-			cameraView.Zoom(0.3f);
+			cameraView.Zoom(camZoom);
 		}
 
 		protected override void OnDispose() {
