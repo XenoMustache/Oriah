@@ -1,8 +1,6 @@
 ﻿using SFML.Graphics;
 using SFML.System;
 using SFML.Window;
-using System;
-using System.Net.Http.Headers;
 using Xenon.Common.Object;
 
 namespace Oriah.Objects {
@@ -66,7 +64,7 @@ namespace Oriah.Objects {
 			cam.window = window;
 			cam.Render();
 
-			// window.Draw(rect);
+			window.Draw(rect);
 			window.Draw(sprite);
 		}
 
