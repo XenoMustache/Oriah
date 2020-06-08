@@ -4,6 +4,7 @@ using System;
 using Xenon.Common.Object;
 
 namespace Oriah.Objects {
+	[Obsolete("Tile object is being phased out, use chunk instead")]
 	public class Tile : GameObject {
 		public bool disabled;
 		public Player player;
