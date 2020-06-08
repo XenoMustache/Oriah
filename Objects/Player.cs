@@ -7,45 +7,31 @@ using Xenon.Common.Object;
 
 namespace Oriah.Objects {
 	public class Player : GameObject {
-		public Vector2f position;
+		public Vector2f position, camPos;
 		public int direction = 1;
 
-		float moveSpeed = 0.15f, spriteSpeed = 0.15f, camZoom = 0.2f;
+		float moveSpeed = 0.15f, spriteSpeed = 0.15f;
 		bool moving;
+		Camera cam = new Camera();
 		Texture texture = new Texture("Resources\\walking.png");
 		Clock spriteClock = new Clock();
-		View cameraView, uiView;
 		RectangleShape rect;
 		Sprite sprite;
 		IntRect spriteRect = new IntRect(new Vector2i(0, 0), new Vector2i(8, 16));
-		Font font = new Font("Resources\\arial.ttf");
-		Text positionText;
 
 		public void Init(Vector2f startingPosition) {
 			position = startingPosition;
 			sprite = new Sprite(texture, spriteRect);
 			sprite.Origin = new Vector2f(4, 8);
-			positionText = new Text("X: " + (float)Math.Floor(position.X) + " Y: " + (float)Math.Floor(position.Y), font, 25);
-			positionText.Scale = new Vector2f(0.5f, 0.5f);
-			positionText.FillColor = Color.White;
+			cam.Init();
 
 			rect = new RectangleShape(new Vector2f(8, 16));
 			rect.Origin = rect.Size / 2;
 			rect.FillColor = Color.Blue;
-
-			cameraView = new View();
-			uiView = new View();
 		}
 
 		public override void Update() {
 			var horizontal = (Keyboard.IsKeyPressed(Keyboard.Key.D) ? 1 : 0) - (Keyboard.IsKeyPressed(Keyboard.Key.A) ? 1 : 0);
-			var zoom = (Keyboard.IsKeyPressed(Keyboard.Key.Hyphen) ? 1 : 0) - (Keyboard.IsKeyPressed(Keyboard.Key.Equal) ? 1 : 0);
-			var oldConverted = new Vector2f((float)Math.Floor(position.X), (float)Math.Floor(position.Y));
-
-			camZoom += zoom * 0.001f;
-			camZoom = Math.Clamp(camZoom, 0.1f, 0.28f);
-
-			if (Keyboard.IsKeyPressed(Keyboard.Key.Backspace)) camZoom = 0.2f;
 
 			if (horizontal != 0) {
 				moving = true;
@@ -72,28 +58,20 @@ namespace Oriah.Objects {
 			sprite.Position = new Vector2f(position.X, position.Y);
 			rect.Position = position;
 
-			var newConverted = new Vector2f((float)Math.Floor(position.X), (float)Math.Floor(position.Y));
-
-			if (horizontal != 0 && newConverted != oldConverted) positionText.DisplayedString = "X: " + newConverted.X + " Y: " + newConverted.Y;
-
-			cameraView.Center = new Vector2f(position.X, position.Y - 15);
+			cam.target = new Vector2f(position.X, position.Y - 15);
+			cam.Update();
 		}
 
 		public override void Render() {
-			window.SetView(uiView);
-			window.Draw(positionText);
-			positionText.Position = window.MapPixelToCoords(new Vector2i(0, 0));
-			uiView.Size = new Vector2f(1000, 500);
+			cam.window = window;
+			cam.Render();
 
-			window.SetView(cameraView);
 			// window.Draw(rect);
 			window.Draw(sprite);
-
-			cameraView.Size = (Vector2f)window.Size;
-			cameraView.Zoom(camZoom);
 		}
 
 		protected override void OnDispose() {
+			cam.Dispose();
 			rect.Dispose();
 			texture.Dispose();
 			sprite.Dispose();
