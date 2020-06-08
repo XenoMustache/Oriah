@@ -7,10 +7,12 @@ using Xenon.Common.Object;
 namespace Oriah.Objects {
 	public class WorldHandler : GameObject {
 		public Player player;
+		public Vector2i size;
 		// List<Tile> tiles = new List<Tile>();
 		Chunk chunk;
 
 		public async Task Generate(Vector2i size) {
+			this.size = size;
 			List<Task> listOfTasks = new List<Task>();
 
 			chunk = new Chunk();

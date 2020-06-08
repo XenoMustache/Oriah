@@ -2,6 +2,7 @@
 using SFML.System;
 using SFML.Window;
 using System;
+using System.Net.Http.Headers;
 using Xenon.Common.Object;
 
 namespace Oriah.Objects {
@@ -25,7 +26,7 @@ namespace Oriah.Objects {
 			sprite = new Sprite(texture, spriteRect);
 			sprite.Origin = new Vector2f(4, 8);
 			positionText = new Text("X: " + (float)Math.Floor(position.X) + " Y: " + (float)Math.Floor(position.Y), font, 25);
-			positionText.Scale = new Vector2f(0.5f, 1f);
+			positionText.Scale = new Vector2f(0.5f, 0.5f);
 			positionText.FillColor = Color.White;
 
 			rect = new RectangleShape(new Vector2f(8, 16));
@@ -81,6 +82,8 @@ namespace Oriah.Objects {
 		public override void Render() {
 			window.SetView(uiView);
 			window.Draw(positionText);
+			positionText.Position = window.MapPixelToCoords(new Vector2i(0, 0));
+			uiView.Size = new Vector2f(1000, 500);
 
 			window.SetView(cameraView);
 			// window.Draw(rect);
