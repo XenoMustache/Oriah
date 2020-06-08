@@ -10,7 +10,7 @@ namespace Oriah.Objects {
 
 		float camZoom = 0.2f;
 		View cameraView, uiView;
-		Font font = new Font("Resources\\arial.ttf");
+		Font font = new Font("Resources\\Fonts\\arial.ttf");
 		Text positionText;
 
 		public void Init() {

@@ -12,7 +12,7 @@ namespace Oriah.Objects {
 		float moveSpeed = 0.15f, spriteSpeed = 0.15f;
 		bool moving, grounded;
 		Camera cam = new Camera();
-		Texture texture = new Texture("Resources\\walking.png");
+		Texture texture = new Texture("Resources\\Sprites\\Player\\player_walking.png");
 		Clock spriteClock = new Clock();
 		Sprite sprite;
 		IntRect spriteRect = new IntRect(new Vector2i(0, 0), new Vector2i(8, 16));

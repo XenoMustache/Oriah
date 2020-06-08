@@ -9,7 +9,7 @@ namespace Oriah.Objects {
 		public int size;
 		public Player player;
 
-		Texture tileset_1 = new Texture("Resources\\tiles.png");
+		Texture ts_outdoors = new Texture("Resources\\Sprites\\Tilesets\\outdoors.png");
 		Chunk chunk;
 
 		public async Task Generate(int size) {
@@ -17,7 +17,7 @@ namespace Oriah.Objects {
 			List<Task> listOfTasks = new List<Task>();
 
 			chunk = new Chunk();
-			chunk.texture = tileset_1;
+			chunk.texture = ts_outdoors;
 			chunk.Init(new Vector2f(0, 0));
 
 			await Task.WhenAll(listOfTasks);
