@@ -13,7 +13,6 @@ namespace Oriah.Objects {
 		Camera cam = new Camera();
 		Texture texture = new Texture("Resources\\walking.png");
 		Clock spriteClock = new Clock();
-		RectangleShape rect;
 		Sprite sprite;
 		IntRect spriteRect = new IntRect(new Vector2i(0, 0), new Vector2i(8, 16));
 
@@ -22,10 +21,6 @@ namespace Oriah.Objects {
 			sprite = new Sprite(texture, spriteRect);
 			sprite.Origin = new Vector2f(4, 8);
 			cam.Init();
-
-			rect = new RectangleShape(new Vector2f(8, 16));
-			rect.Origin = rect.Size / 2;
-			rect.FillColor = Color.Blue;
 		}
 
 		public override void Update() {
@@ -54,7 +49,6 @@ namespace Oriah.Objects {
 
 			position += new Vector2f(moveSpeed * horizontal, 0);
 			sprite.Position = new Vector2f(position.X, position.Y);
-			rect.Position = position;
 
 			cam.target = new Vector2f(position.X, position.Y - 15);
 			cam.Update();
@@ -64,13 +58,11 @@ namespace Oriah.Objects {
 			cam.window = window;
 			cam.Render();
 
-			window.Draw(rect);
 			window.Draw(sprite);
 		}
 
 		protected override void OnDispose() {
 			cam.Dispose();
-			rect.Dispose();
 			texture.Dispose();
 			sprite.Dispose();
 
