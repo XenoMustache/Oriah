@@ -16,7 +16,8 @@ namespace Oriah.States {
 			var w = world.Generate(1);
 			w.Wait();
 
-			player.Init(new Vector2f(64, -8));
+			player.Init(new Vector2f(64, -1000));
+			world.player = player;
 		}
 
 		public override void Update() {

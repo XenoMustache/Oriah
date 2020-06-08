@@ -5,10 +5,10 @@ using Xenon.Common.Object;
 
 namespace Oriah.Objects {
 	public class Chunk : GameObject {
+		public Texture texture;
+
 		byte[,] tiles = new byte[16, 16];
 		Sprite[,] sprites = new Sprite[16, 16];
-		// TODO: Move texture object out of chunk
-		Texture texture = new Texture("Resources\\tiles.png");
 
 		public void Init(Vector2f position) {
 			for (var i = 0; i < 16; i++) {
