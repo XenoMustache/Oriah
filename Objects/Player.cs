@@ -1,6 +1,7 @@
 ﻿using SFML.Graphics;
 using SFML.System;
 using SFML.Window;
+using Xenon.Client;
 using Xenon.Common;
 
 namespace Oriah.Objects {
@@ -26,7 +27,7 @@ namespace Oriah.Objects {
 		}
 
 		public override void Update() {
-			var horizontal = ((Keyboard.IsKeyPressed(Keyboard.Key.D) ? 1 : 0) - (Keyboard.IsKeyPressed(Keyboard.Key.A) ? 1 : 0)) * (Oriah.isFocused ? 1 : 0);
+			var horizontal = Input.GetKey(Keyboard.Key.D) - Input.GetKey(Keyboard.Key.A);
 			var veritcal = grounded ? 0 : 1;
 
 			if (horizontal != 0) {

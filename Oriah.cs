@@ -14,13 +14,5 @@ namespace Oriah {
 
 			base.Init();
 		}
-
-		protected override void Update() {
-			base.Update();
-		}
-
-		protected override void Render() {
-			base.Render();
-		}
 	}
 }

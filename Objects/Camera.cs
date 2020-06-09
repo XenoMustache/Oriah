@@ -4,6 +4,7 @@ using SFML.Window;
 using System;
 using Xenon.Common.Utilities;
 using Xenon.Common;
+using Xenon.Client;
 
 namespace Oriah.Objects {
 	public class Camera : GameObject {
@@ -30,18 +31,18 @@ namespace Oriah.Objects {
 
 		public override void Update() {
 			fps.Update();
-			var zoom = ((Keyboard.IsKeyPressed(Keyboard.Key.Hyphen) ? 1 : 0) - (Keyboard.IsKeyPressed(Keyboard.Key.Equal) ? 1 : 0)) * (Oriah.isFocused ? 1 : 0);
+			var zoom = Input.GetKey(Keyboard.Key.Hyphen) - Input.GetKey(Keyboard.Key.Equal);
 
 			camZoom += zoom * 0.001f;
 			camZoom = Math.Clamp(camZoom, 0.1f, 0.28f);
 
-			if (Keyboard.IsKeyPressed(Keyboard.Key.Backspace) && Oriah.isFocused) camZoom = 0.2f;
+			if (Input.GetKeyDown(Keyboard.Key.Backspace, true)) camZoom = 0.2f;
 
 			cameraView.Center = new Vector2f(target.X, target.Y);
 
 			var x = (float)Math.Floor(target.X);
 			var y = (float)Math.Floor(target.Y + 15);
-			var fpsText = $"FPS: {fps.getFPS()}\n";
+			var fpsText = $"FPS: {fps.GetFPS()}\n";
 			var position = $"X: {x}, Y: {y}\n";
 			hudText.DisplayedString = fpsText + position;
 		}
