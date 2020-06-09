@@ -11,12 +11,15 @@ namespace Oriah.Objects {
 		float camZoom = 0.2f;
 		View cameraView, uiView;
 		Font font = new Font("Resources\\Fonts\\arial.ttf");
-		Text positionText;
+		Text hudText;
 
 		public void Init() {
-			positionText = new Text("X: " + (float)Math.Floor(target.X) + " Y: " + (float)Math.Floor(target.Y), font, 25);
-			positionText.Scale = new Vector2f(0.5f, 0.5f);
-			positionText.FillColor = Color.White;
+			var x = (float)Math.Floor(target.X);
+			var y = (float)Math.Floor(target.Y + 15);
+
+			hudText = new Text($"X: {x}, Y: {y}", font, 25);
+			hudText.Scale = new Vector2f(0.5f, 0.5f);
+			hudText.FillColor = Color.White;
 
 			cameraView = new View();
 			uiView = new View();
@@ -32,14 +35,16 @@ namespace Oriah.Objects {
 
 			cameraView.Center = new Vector2f(target.X, target.Y);
 
-			positionText.DisplayedString = "X: " + (float)Math.Floor(target.X) + " Y: " + (float)Math.Floor(target.Y);
+			var x = (float)Math.Floor(target.X);
+			var y = (float)Math.Floor(target.Y + 15);
+			hudText.DisplayedString = $"X: {x}, Y: {y}";
 		}
 
 		public override void Render() {
 			window.SetView(uiView);
 			uiView.Size = new Vector2f(1000, 500);
-			window.Draw(positionText);
-			positionText.Position = window.MapPixelToCoords(new Vector2i(0, 0));
+			window.Draw(hudText);
+			hudText.Position = window.MapPixelToCoords(new Vector2i(0, 0));
 
 			window.SetView(cameraView);
 			cameraView.Size = (Vector2f)window.Size;
