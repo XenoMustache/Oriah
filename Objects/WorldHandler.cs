@@ -2,7 +2,7 @@
 using SFML.System;
 using System.Collections.Generic;
 using System.Threading.Tasks;
-using Xenon.Common.Object;
+using Xenon.Common;
 
 namespace Oriah.Objects {
 	public class WorldHandler : GameObject {

@@ -1,7 +1,7 @@
 ﻿using SFML.Graphics;
 using SFML.System;
 using System;
-using Xenon.Common.Object;
+using Xenon.Common;
 
 namespace Oriah.Objects {
 	[Obsolete("Tile object is being phased out, use chunk instead")]

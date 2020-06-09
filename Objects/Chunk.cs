@@ -1,7 +1,6 @@
 ﻿using SFML.Graphics;
 using SFML.System;
-using System;
-using Xenon.Common.Object;
+using Xenon.Common;
 
 namespace Oriah.Objects {
 	public class Chunk : GameObject {

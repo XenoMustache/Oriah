@@ -2,8 +2,8 @@
 using SFML.System;
 using SFML.Window;
 using System;
-using Xenon.Common.Object;
 using Xenon.Common.Utilities;
+using Xenon.Common;
 
 namespace Oriah.Objects {
 	public class Camera : GameObject {
