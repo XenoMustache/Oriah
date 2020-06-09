@@ -3,21 +3,24 @@ using SFML.System;
 using SFML.Window;
 using System;
 using Xenon.Common.Object;
+using Xenon.Common.Utilities;
 
 namespace Oriah.Objects {
 	public class Camera : GameObject {
 		public Vector2f target;
 
 		float camZoom = 0.2f;
-		View cameraView, uiView;
+		FPS fps = new FPS();
 		Font font = new Font("Resources\\Fonts\\arial.ttf");
+		View cameraView, uiView;
 		Text hudText;
 
 		public void Init() {
 			var x = (float)Math.Floor(target.X);
 			var y = (float)Math.Floor(target.Y + 15);
+			var position = $"X: {x}, Y: {y}";
 
-			hudText = new Text($"X: {x}, Y: {y}", font, 25);
+			hudText = new Text(position, font, 25);
 			hudText.Scale = new Vector2f(0.5f, 0.5f);
 			hudText.FillColor = Color.White;
 
@@ -26,6 +29,7 @@ namespace Oriah.Objects {
 		}
 
 		public override void Update() {
+			fps.Update();
 			var zoom = (Keyboard.IsKeyPressed(Keyboard.Key.Hyphen) ? 1 : 0) - (Keyboard.IsKeyPressed(Keyboard.Key.Equal) ? 1 : 0);
 
 			camZoom += zoom * 0.001f;
@@ -37,7 +41,9 @@ namespace Oriah.Objects {
 
 			var x = (float)Math.Floor(target.X);
 			var y = (float)Math.Floor(target.Y + 15);
-			hudText.DisplayedString = $"X: {x}, Y: {y}";
+			var fpsText = $"FPS: {fps.getFPS()}\n";
+			var position = $"X: {x}, Y: {y}\n";
+			hudText.DisplayedString = fpsText + position;
 		}
 
 		public override void Render() {
