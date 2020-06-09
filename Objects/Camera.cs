@@ -30,12 +30,12 @@ namespace Oriah.Objects {
 
 		public override void Update() {
 			fps.Update();
-			var zoom = (Keyboard.IsKeyPressed(Keyboard.Key.Hyphen) ? 1 : 0) - (Keyboard.IsKeyPressed(Keyboard.Key.Equal) ? 1 : 0);
+			var zoom = ((Keyboard.IsKeyPressed(Keyboard.Key.Hyphen) ? 1 : 0) - (Keyboard.IsKeyPressed(Keyboard.Key.Equal) ? 1 : 0)) * (Oriah.isFocused ? 1 : 0);
 
 			camZoom += zoom * 0.001f;
 			camZoom = Math.Clamp(camZoom, 0.1f, 0.28f);
 
-			if (Keyboard.IsKeyPressed(Keyboard.Key.Backspace)) camZoom = 0.2f;
+			if (Keyboard.IsKeyPressed(Keyboard.Key.Backspace) && Oriah.isFocused) camZoom = 0.2f;
 
 			cameraView.Center = new Vector2f(target.X, target.Y);
 

@@ -26,7 +26,7 @@ namespace Oriah.Objects {
 		}
 
 		public override void Update() {
-			var horizontal = (Keyboard.IsKeyPressed(Keyboard.Key.D) ? 1 : 0) - (Keyboard.IsKeyPressed(Keyboard.Key.A) ? 1 : 0);
+			var horizontal = ((Keyboard.IsKeyPressed(Keyboard.Key.D) ? 1 : 0) - (Keyboard.IsKeyPressed(Keyboard.Key.A) ? 1 : 0)) * (Oriah.isFocused ? 1 : 0);
 			var veritcal = grounded ? 0 : 1;
 
 			if (horizontal != 0) {
