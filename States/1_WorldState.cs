@@ -13,10 +13,10 @@ namespace Oriah.States {
 			Objects.Add(world);
 			Objects.Add(player);
 
-			var w = world.Generate(1);
+			var w = world.Generate(10);
 			w.Wait();
 
-			player.Init(new Vector2f(64, -9));
+			player.Init(new Vector2f((world.size / 2) * 128, -9));
 			world.player = player;
 		}
 

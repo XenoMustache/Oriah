@@ -9,16 +9,20 @@ namespace Oriah.Objects {
 		public int size;
 		public Player player;
 
+		List<Chunk> chunks = new List<Chunk>();
 		Texture ts_outdoors = new Texture("Resources\\Sprites\\Tilesets\\outdoors.png");
-		Chunk chunk;
 
 		public async Task Generate(int size) {
 			this.size = size;
 			List<Task> listOfTasks = new List<Task>();
 
-			chunk = new Chunk();
-			chunk.texture = ts_outdoors;
-			chunk.Init(new Vector2f(0, 0));
+			for (var i = 0; i < size; i++) {
+				Chunk chunk = new Chunk();
+				chunk.texture = ts_outdoors;
+				chunk.Init(new Vector2f(i * 128, 0));
+
+				chunks.Add(chunk);
+			}
 
 			await Task.WhenAll(listOfTasks);
 		}
@@ -26,8 +30,10 @@ namespace Oriah.Objects {
 		public override void Update() { }
 
 		public override void Render() {
-			chunk.window = window;
-			chunk.Render();
+			foreach (var chunk in chunks) {
+				chunk.window = window;
+				chunk.Render();
+			}
 		}
 	}
 }
