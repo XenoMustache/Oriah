@@ -27,6 +27,7 @@ namespace Oriah.Objects {
 		}
 
 		public override void Update() {
+			var jump = Input.GetKeyDown(Keyboard.Key.Space, true);
 			var horizontal = Input.GetKey(Keyboard.Key.D) - Input.GetKey(Keyboard.Key.A);
 			var veritcal = grounded ? 0 : 1;
 
@@ -49,11 +50,12 @@ namespace Oriah.Objects {
 				spriteClock.Restart();
 			}
 
-
 			sprite.Scale = new Vector2f(1 * direction, 1);
 
 			position += new Vector2f(moveSpeed * horizontal, 0.5f * veritcal);
+
 			if (position.Y >= -8f) grounded = true; else grounded = false;
+
 			sprite.Position = new Vector2f(position.X, position.Y);
 
 			cam.target = new Vector2f(position.X, position.Y - 15);
