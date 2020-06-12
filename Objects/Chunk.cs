@@ -8,6 +8,8 @@ namespace Oriah.Objects {
 
 		byte[,] tiles = new byte[16, 16];
 		Sprite[,] sprites = new Sprite[16, 16];
+		FloatRect rect;
+		RectangleShape rectRender;
 
 		public void Init(Vector2f position) {
 			for (var i = 0; i < 16; i++) {
@@ -22,6 +24,14 @@ namespace Oriah.Objects {
 					sprites[i, j].Position = new Vector2f(position.X + i * 8, position.Y + j * 8);
 				}
 			}
+
+			rect = new FloatRect(position, new Vector2f(position.X + (8 * 16), position.Y + (8 * 16)));
+
+			rectRender = new RectangleShape(new Vector2f(rect.Width, rect.Height));
+			rectRender.Position = position;
+			rectRender.FillColor = Color.Transparent;
+			rectRender.OutlineColor = Color.Green;
+			rectRender.OutlineThickness = 0.2f;
 		}
 
 		public override void Update() { }
@@ -36,6 +46,7 @@ namespace Oriah.Objects {
 
 		protected override void OnDispose() {
 			texture.Dispose();
+			rectRender.Dispose();
 
 			foreach (var sprite in sprites) {
 				sprite.Dispose();

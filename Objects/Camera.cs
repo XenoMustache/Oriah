@@ -10,7 +10,7 @@ namespace Oriah.Objects {
 	public class Camera : GameObject {
 		public Vector2f target;
 
-		float camZoom = 0.2f;
+		float camZoom = 0.2f, zoomSpeed = 0.3f;
 		FPS fps = new FPS();
 		Font font = new Font("Resources\\Fonts\\arial.ttf");
 		View cameraView, uiView;
@@ -33,7 +33,7 @@ namespace Oriah.Objects {
 			fps.Update();
 			var zoom = Input.GetKey(Keyboard.Key.Hyphen) - Input.GetKey(Keyboard.Key.Equal);
 
-			camZoom += zoom * 0.001f;
+			camZoom += zoom * (0.001f * zoomSpeed);
 			camZoom = Math.Clamp(camZoom, 0.1f, 0.28f);
 
 			if (Input.GetKeyDown(Keyboard.Key.Backspace, true)) camZoom = 0.2f;
