@@ -1,14 +1,16 @@
 ﻿using SFML.Graphics;
 using SFML.System;
+using System;
 using Xenon.Common;
 
 namespace Oriah.Objects {
 	public class Chunk : GameObject {
 		public Texture texture;
+		public bool disabled = true;
+		public FloatRect rect;
 
 		byte[,] tiles = new byte[16, 16];
 		Sprite[,] sprites = new Sprite[16, 16];
-		FloatRect rect;
 		RectangleShape rectRender;
 
 		public void Init(Vector2f position) {
@@ -34,7 +36,9 @@ namespace Oriah.Objects {
 			rectRender.OutlineThickness = 0.2f;
 		}
 
-		public override void Update() { }
+		public override void Update() { 
+			Console.WriteLine(disabled);
+		}
 
 		public override void Render() {
 			for (var i = 0; i < 16; i++) {

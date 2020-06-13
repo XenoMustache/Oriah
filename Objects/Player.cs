@@ -1,12 +1,15 @@
 ﻿using SFML.Graphics;
 using SFML.System;
 using SFML.Window;
+using System;
+using System.Collections.Generic;
 using Xenon.Client;
 using Xenon.Common;
 
 namespace Oriah.Objects {
 	public class Player : GameObject {
 		public Vector2f position, camPos;
+		public List<Chunk> chunks;
 
 		int direction = 1;
 		float moveSpeed = 0.15f, spriteSpeed = 0.15f;
@@ -16,6 +19,7 @@ namespace Oriah.Objects {
 		Clock spriteClock = new Clock();
 		Sprite sprite;
 		IntRect spriteRect = new IntRect(new Vector2i(0, 0), new Vector2i(8, 16));
+		FloatRect cullrect = new FloatRect();
 
 		public void Init(Vector2f startingPosition) {
 			position = startingPosition;
@@ -58,6 +62,9 @@ namespace Oriah.Objects {
 
 			sprite.Position = new Vector2f(position.X, position.Y);
 
+			foreach (var chunk in chunks)
+				if (!chunk.rect.Intersects(cullrect)) chunk.disabled = false; else chunk.disabled = true;
+
 			cam.target = new Vector2f(position.X, position.Y - 15);
 			cam.Update();
 		}
@@ -65,6 +72,12 @@ namespace Oriah.Objects {
 		public override void Render() {
 			cam.window = window;
 			cam.Render();
+
+			cullrect.Left = window.MapPixelToCoords(new Vector2i(0, 0)).X;
+			cullrect.Top = window.MapPixelToCoords(new Vector2i(0, 0)).Y;
+
+			cullrect.Width = window.MapPixelToCoords((Vector2i)window.Size).X;
+			cullrect.Height = window.MapPixelToCoords((Vector2i)window.Size).Y;
 
 			window.Draw(sprite);
 		}

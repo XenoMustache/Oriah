@@ -17,6 +17,7 @@ namespace Oriah.States {
 			w.Wait();
 
 			player.Init(new Vector2f((world.size / 2) * 128, -9));
+			player.chunks = world.chunks;
 			world.player = player;
 		}
 

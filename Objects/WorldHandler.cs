@@ -8,8 +8,8 @@ namespace Oriah.Objects {
 	public class WorldHandler : GameObject {
 		public int size;
 		public Player player;
+		public List<Chunk> chunks = new List<Chunk>();
 
-		List<Chunk> chunks = new List<Chunk>();
 		Texture ts_outdoors = new Texture("Resources\\Sprites\\Tilesets\\outdoors.png");
 
 		public async Task Generate(int size) {
@@ -31,8 +31,10 @@ namespace Oriah.Objects {
 
 		public override void Render() {
 			foreach (var chunk in chunks) {
-				chunk.window = window;
-				chunk.Render();
+				if (!chunk.disabled) {
+					chunk.window = window;
+					chunk.Render();
+				}
 			}
 		}
 	}
